@@ -54,7 +54,13 @@ shinyUI(pageWithSidebar(
               'Comparing the Response Time of Three Simple Queueing Systems'
             ),
             ', An analysis of three queuing systems and the inspiration for our shiny application.'
-   )
+   ),
+    helpText('-',
+             a(href='http://cran.r-project.org/web/packages/queueing/queueing.pdf',
+               'queueing: Analysis of Queueing Networks and Models'),
+             ', An R package by Pedro Canadilla for solving queueing networks.',
+             'We used it in our shiny application.'
+    )
   ),
   
   mainPanel(

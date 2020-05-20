@@ -28,7 +28,9 @@ shinyServer(
     # Create the queue networks for each of the three systems
     # 
     gsQueue <- reactive({ QueueingModel(NewInput.MM1(lambda = rho,       mu = 1)) })
+    
     btQueue <- reactive({ QueueingModel(NewInput.MMC(lambda = rho * N(), mu = 1, c = N())) })
+    
     ssQueue <- reactive({ QueueingModel(NewInput.MM1(lambda = rho * N() ,mu = 1 * N())) })
     
     # Watch for zoom actions in chart
@@ -58,8 +60,9 @@ shinyServer(
       rspData <- 
         rbind (
                # data.frame(util= rho, rsp = W(gsQueue()), qtype = 'Grocery Store'), 
-               data.frame(util= rho, rsp = W(btQueue()), qtype = 'Response Time')
-               # , 
+               data.frame(util= rho, rsp = W(btQueue()), qtype = 'Mean'), 
+               data.frame(util= rho, rsp = W(btQueue()) + 2*sqrt(VT(btQueue())), qtype = '95%'), 
+               data.frame(util= rho, rsp = W(btQueue()) + 3*sqrt(VT(btQueue())), qtype = '99.9%')
                # data.frame(util= rho, rsp = W(ssQueue()), qtype = 'Super Server') 
         )
       
