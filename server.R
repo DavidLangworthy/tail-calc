@@ -28,9 +28,10 @@ shinyServer(
     N <- reactive({ input$nServers })
     
     processing_s <- reactive({ input$processingMs }/1000)
+
     # Create the queue networks for each of the three systems
     # 
-    btQueue <- reactive({ QueueingModel(NewInput.MMC(lambda = (1/processing_s() * rho) * N(), mu = 1/processing_s(), c = N())) })
+    btQueue <- reactive({ QueueingModel(NewInput.MMC(lambda =   N() * rho / processing_s(), mu = 1/processing_s(), c = N())) })
 
     # Watch for zoom actions in chart
     # 
